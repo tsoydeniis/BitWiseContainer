@@ -1,0 +1,11 @@
+add_library(NDimArray
+        header_files/Array.h
+        header_files/Buffer.h
+        header_files/Storage.h
+        header_files/global.h
+        source_files/Array.cpp
+        source_files/Buffer.cpp
+        source_files/Storage.cpp
+        source_files/global.cpp
+        header_files/Errors.h
+)
