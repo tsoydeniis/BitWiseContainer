@@ -1,18 +1,18 @@
 #include "../header_files/Array.h"
 
 
-Array::Array(size_t dim_cnt, size_t type_bit_size, size_t* dim_list) {
+Array::Array(std::size_t dim_cnt, std::size_t type_bit_size, std::size_t* dim_list) {
     dim_cnt_ = dim_cnt;
     type_bit_size_ = type_bit_size;
-    size_t size_ = 1;
-    dim_list_ = new size_t[dim_cnt_];
+    std::size_t size_ = 1;
+    dim_list_ = new std::size_t[dim_cnt_];
     for (int i = 0; i < dim_cnt_; ++i) {
         size_ *= dim_list[i];
         dim_list_[i] = dim_list[i];
     }
     buffer_ = Buffer(dim_cnt_);
     storage_ = Storage(type_bit_size_, size_);
-    dim_sizes_cache_ = new size_t[dim_cnt_];
+    dim_sizes_cache_ = new std::size_t[dim_cnt_];
     dim_sizes_cache_[dim_cnt_ - 1] = 1;
     for (int i = dim_cnt_ - 2; i >= 0; --i) {
         dim_sizes_cache_[i] = dim_sizes_cache_[i + 1] * dim_list_[i + 1];
@@ -44,7 +44,7 @@ Array& Array::operator=(const Array& copy) {
     return *this;
 }
 
-Array& Array::operator[](size_t arg) {
+Array& Array::operator[](std::size_t arg) {
     buffer_.Add(arg);
     if (arg >= dim_list_[buffer_.cur_index_ - 1]) {
         throw WrongIndex();
@@ -57,7 +57,7 @@ void Array::operator=(uint32_t value) {
     if (!buffer_.Ready()) {
         throw BufferError();
     }
-    size_t number = 0;
+    std::size_t number = 0;
     for (int i = 0; i < buffer_.size_; ++i) {
         number += dim_sizes_cache_[i] * buffer_.data_[i];
     }
@@ -69,7 +69,7 @@ Array::operator uint32_t() {
     if (!buffer_.Ready()) {
         throw BufferError();
     }
-    size_t number = 0;
+    std::size_t number = 0;
     for (int i = 0; i < buffer_.size_; ++i) {
         number += dim_sizes_cache_[i] * buffer_.data_[i];
     }
@@ -82,8 +82,8 @@ Array::operator int() {
     return static_cast<int>(uint32_t(*this));
 }
 
-Array Array::MakeList(size_t x, size_t y, size_t z) {
-    size_t list[3] = {x, y, z};
+Array Array::MakeList(std::size_t x, std::size_t y, std::size_t z) {
+    std::size_t list[3] = {x, y, z};
     return Array(3, 17, list);
 }
 
@@ -92,11 +92,11 @@ void Array::Mult(uint32_t arg) {
 }
 
 std::ostream& operator<<(std::ostream& stream, Array& arg) {
-    size_t cnt = 1;
-    for (size_t i = 0; i < arg.dim_cnt_; ++i) {
+    std::size_t cnt = 1;
+    for (std::size_t i = 0; i < arg.dim_cnt_; ++i) {
         cnt *= arg.dim_list_[i];
     }
-    for (size_t i = 0; i < cnt; ++i) {
+    for (std::size_t i = 0; i < cnt; ++i) {
         stream << uint32_t(arg.storage_[i]);
     }
 

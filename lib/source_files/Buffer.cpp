@@ -1,8 +1,8 @@
 #include "../header_files/Buffer.h"
 
-Buffer::Buffer(size_t size) {
+Buffer::Buffer(std::size_t size) {
     size_ = size;
-    data_ = new size_t[size_];
+    data_ = new std::size_t[size_];
 }
 
 Buffer::~Buffer() {
@@ -27,7 +27,7 @@ Buffer& Buffer::operator=(const Buffer& copy) {
     return *this;
 }
 
-void Buffer::Add(size_t value) {
+void Buffer::Add(std::size_t value) {
     if (cur_index_ == size_) {
         throw BufferError();
     }

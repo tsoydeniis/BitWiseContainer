@@ -6,7 +6,7 @@
 TEST(TestSuite, DimTest1) {
     const int32_t dim_cnt = 4;
     const int32_t type_bit_size = 21;
-    size_t a[dim_cnt] = {87, 6, 7, 12};
+    std::size_t a[dim_cnt] = {87, 6, 7, 12};
     Array list(dim_cnt, type_bit_size, a);
 
     for (int arg1 = 0; arg1 < a[0]; ++arg1) {
@@ -27,7 +27,7 @@ TEST(TestSuite, DimTest1) {
 TEST(TestSuite, BitSetTest) {
     const int32_t dim_cnt = 1;
     const int32_t type_bit_size = 1;
-    size_t a[dim_cnt] = {3000000};
+    std::size_t a[dim_cnt] = {3000000};
     Array list(dim_cnt, type_bit_size, a);
 
     for (int i = 0; i < a[0]; ++i) {
@@ -43,7 +43,7 @@ TEST(TestSuite, MultTest) {
     const int32_t dim_cnt = 4;
     const int32_t type_bit_size = 14;
     const int32_t value = 99;
-    size_t a[dim_cnt] = {87, 800, 7, 12};
+    std::size_t a[dim_cnt] = {87, 800, 7, 12};
     Array list(dim_cnt, type_bit_size, a);
 
     for (int arg1 = 0; arg1 < a[0]; ++arg1) {
@@ -86,8 +86,8 @@ TEST(TestSuite, MakeListTest) {
 }
 
 TEST(TestSuite, CopyTest) {
-    size_t a[4] = {37, 800, 7, 12};
-    size_t b[1] = {8};
+    std::size_t a[4] = {37, 800, 7, 12};
+    std::size_t b[1] = {8};
     Array list(4, 14, a);
     list = Array(1, 14, b);
 
